@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LD_Navigation</string>
+    <string name="activity_event_sample">Activity Event Sample</string>
+    <string name="activity_function_sample">Activity Function Sample</string>
+    <string name="fragment_event_sample">Fragment Event Sample</string>
+    <string name="fragment_function_sample">Fragment Function Sample</string>
+</resources>
