@@ -61,6 +61,24 @@
                     android:text="@string/fragment_function_sample" />
 
 
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="@{() -> viewModel.fireGenericEvent()}"
+                    android:padding="15dp"
+                    android:text="@string/launch_generic_event" />
+
+
+                <Button
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="@{() -> viewModel.showTimeStamp()}"
+                    android:padding="15dp"
+                    android:text="@string/show_time_stamp" />
+
+
             </LinearLayout>
 
         </ScrollView>

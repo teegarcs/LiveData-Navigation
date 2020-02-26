@@ -1,11 +1,14 @@
 package com.captech.ld_navigation
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.captech.ld_navigation.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +22,9 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = viewModel
 
 
-        //Activity Samples
+        /*
+        Activity Samples
+         */
 
         viewModel.activityEventSample.observe(this) {
             startActivity(it.buildIntent(this))
@@ -30,7 +35,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        //Fragment Samples
+        /*
+        Fragment Samples
+         */
 
         viewModel.fragmentEventSample.observe(this) {
             val transaction = supportFragmentManager.beginTransaction()
@@ -42,5 +49,21 @@ class MainActivity : AppCompatActivity() {
         viewModel.functionFMSample.observe(this) {
             it(supportFragmentManager)
         }
+
+        /*
+        Generic Event Samples
+         */
+
+        viewModel.genericEventSample.observe(this) {
+            Snackbar
+                .make(binding.root, "Generic One Time Event", Snackbar.LENGTH_LONG)
+                .show()
+        }
+
+        viewModel.timeEventSample.observe(this) {
+            Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+        }
+
+
     }
 }

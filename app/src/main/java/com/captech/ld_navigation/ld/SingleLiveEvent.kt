@@ -7,7 +7,7 @@ import androidx.lifecycle.Observer
 import java.util.concurrent.atomic.AtomicBoolean
 
 
-class SingleLiveEvent<T> : MutableLiveData<T>() {
+open class SingleLiveEvent<T> : MutableLiveData<T>() {
     private val mPending = AtomicBoolean(false)
 
 
@@ -26,5 +26,13 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
     override fun setValue(t: T?) {
         mPending.set(true)
         super.setValue(t)
+    }
+
+
+    /**
+     * Util function for Void implementations.
+     */
+    fun call() {
+        value = null
     }
 }
