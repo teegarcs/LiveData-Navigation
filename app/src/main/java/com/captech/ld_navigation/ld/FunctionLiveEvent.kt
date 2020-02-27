@@ -21,7 +21,6 @@ class FunctionLiveEvent<T> : MutableLiveData<(arg: T) -> Unit>() {
         })
     }
 
-
     @MainThread
     override fun setValue(t: (arg: T) -> Unit) {
         mPending.set(true)
