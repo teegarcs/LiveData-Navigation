@@ -38,27 +38,9 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:onClick="@{() -> viewModel.launchFunctionActivitySample()}"
-                    android:padding="15dp"
-                    android:text="@string/activity_function_sample" />
-
-
-                <Button
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:onClick="@{() -> viewModel.launchFragmentEventSample()}"
                     android:padding="15dp"
                     android:text="@string/fragment_event_sample" />
-
-
-                <Button
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:onClick="@{() -> viewModel.launchFunctionFMSample()}"
-                    android:padding="15dp"
-                    android:text="@string/fragment_function_sample" />
 
 
                 <Button

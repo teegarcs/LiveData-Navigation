@@ -1,7 +1,5 @@
 package com.captech.ld_navigation
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -9,6 +7,7 @@ import com.captech.ld_navigation.demo_classes.SampleActivityOne
 import com.captech.ld_navigation.demo_classes.SampleFragmentOne
 import com.captech.ld_navigation.event.ActivityEvent
 import com.captech.ld_navigation.event.FragmentEvent
+import com.captech.ld_navigation.event.NavEvent
 import io.mockk.*
 import org.junit.Before
 import org.junit.Rule
@@ -30,11 +29,11 @@ class MainViewModelTest {
     fun testLaunchActivityEventSample() {
         var eventReceived: ActivityEvent? = null
 
-        val observer = Observer<ActivityEvent> {
-            eventReceived = it
+        val observer = Observer<NavEvent> {
+            eventReceived = it as ActivityEvent
         }
 
-        viewModel.activityEventSample.observeForever(observer)
+        viewModel.navEventSample.observeForever(observer)
 
         mockkConstructor(Bundle::class)
         every {
@@ -51,41 +50,19 @@ class MainViewModelTest {
 
         assert(eventReceived?.clazz == SampleActivityOne::class.java)
 
-        viewModel.activityEventSample.removeObserver(observer)
+        viewModel.navEventSample.removeObserver(observer)
     }
 
-    @Test
-    fun testLaunchFunctionActivitySample() {
-        val mainActivity = mockk<MainActivity>()
-        val observer = Observer<(arg: Activity) -> Unit> { it(mainActivity) }
-
-        viewModel.functionActivitySample.observeForever(observer)
-
-        mockkConstructor(Intent::class)
-
-        every {
-            mainActivity.startActivity(any())
-        } returns Unit
-
-        viewModel.launchFunctionActivitySample()
-
-        verify {
-            mainActivity.startActivity(any())
-        }
-
-
-        viewModel.functionActivitySample.removeObserver(observer)
-    }
 
     @Test
     fun testLaunchFragmentEventSample() {
         var eventReceived: FragmentEvent? = null
 
-        val observer = Observer<FragmentEvent> {
-            eventReceived = it
+        val observer = Observer<NavEvent> {
+            eventReceived = it as FragmentEvent
         }
 
-        viewModel.fragmentEventSample.observeForever(observer)
+        viewModel.navEventSample.observeForever(observer)
 
         mockkConstructor(Bundle::class)
         every {
@@ -102,7 +79,7 @@ class MainViewModelTest {
 
         assert(eventReceived?.clazz == SampleFragmentOne::class.java)
 
-        viewModel.fragmentEventSample.removeObserver(observer)
+        viewModel.navEventSample.removeObserver(observer)
     }
 
 

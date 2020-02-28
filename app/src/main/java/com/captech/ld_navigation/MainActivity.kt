@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.captech.ld_navigation.databinding.ActivityMainBinding
+import com.captech.ld_navigation.event.ActivityEvent
+import com.captech.ld_navigation.event.FragmentEvent
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -21,33 +23,20 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         binding.viewModel = viewModel
 
-
         /*
-        Activity Samples
+        Navigation Event Samples
          */
 
-        viewModel.activityEventSample.observe(this) {
-            startActivity(it.buildIntent(this))
-        }
-
-        viewModel.functionActivitySample.observe(this) {
-            it(this)
-        }
-
-
-        /*
-        Fragment Samples
-         */
-
-        viewModel.fragmentEventSample.observe(this) {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.addToBackStack(null)
-                .replace(R.id.fragmentContainer, it.buildFragment(), it.tag)
-                .commit()
-        }
-
-        viewModel.functionFMSample.observe(this) {
-            it(supportFragmentManager)
+        viewModel.navEventSample.observe(this) {
+            if (it is ActivityEvent) {
+                startActivity(it.buildIntent(this))
+            } else if (it is FragmentEvent) {
+                supportFragmentManager.beginTransaction().apply {
+                    addToBackStack(null)
+                    replace(R.id.fragmentContainer, it.buildFragment(), it.tag)
+                    commit()
+                }
+            }
         }
 
         /*
